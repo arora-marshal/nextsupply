@@ -1,0 +1,26 @@
+<div class="sw-cms-el-config-image-gallery">
+    <sw-select-field
+        v-model:value="element.config.galleryPosition.value"
+        :label="$tc('sw-cms.elements.imageGallery.config.label.navigationPreview')"
+    >
+        <option value="left">
+            left
+        </option>
+        <option value="right">
+            right
+        </option>
+    </sw-select-field>
+
+    <sw-switch-field
+        v-model:value="element.config.magnifierOverGallery.value"
+        bordered
+        :label="$tc('sw-cms.elements.imageGallery.config.label.magnifierOverGallery')"
+        :help-text="$tc('sw-cms.elements.imageGallery.config.label.magnifierOverGalleryHelpText')"
+    />
+
+    <sw-switch-field
+        v-model:value="element.config.fullScreen.value"
+        bordered
+        :label="$tc('sw-cms.elements.imageGallery.config.label.fullscreen')"
+    />
+</div>

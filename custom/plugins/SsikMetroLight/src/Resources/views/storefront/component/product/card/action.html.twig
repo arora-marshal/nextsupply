@@ -1,0 +1,28 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
+{% set productCard = config('SsikMetroLight.config.productCard') %}
+{% set productBoxHover = config('SsikMetroLight.config.productBoxHover') %}
+
+{# @deprecated tag:v6.7.0 - Block will be removed, use component_product_box_action_buy_button instead #}
+{% block page_product_detail_product_buy_button %}
+    {% if productCard is not empty and productCard is same as('metro') %}
+        <button class="btn btn-buy"
+                title="{{ "listing.boxAddProduct"|trans|striptags }}">
+            {% sw_icon 'icon-basket' style { 'pack':'line', 'namespace': 'SsikMetroLight', 'class':'ssik md add-cart' } %}
+        </button>
+    {% else %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_action_detail %}
+    {% if productCard is not empty and productCard is same as('metro') %}
+        <a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
+            class="btn btn-light"
+            title="{{ "listing.boxProductDetails"|trans|striptags }}">
+            {% sw_icon 'icon-right' style { 'pack':'line', 'namespace': 'SsikMetroLight', 'class':'ssik md detail-text' } %}
+        </a>
+    {% else %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}

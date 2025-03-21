@@ -1,0 +1,113 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% if aspectRatio is empty %}
+    {% set aspectRatio = 1 %}
+{% endif %}
+
+{% set productCard = config('SsikMetroLight.config.productCard') %}
+{% set productBoxHover = config('SsikMetroLight.config.productBoxHover') %}
+
+{% if productBoxHover == 1 %}
+    {% set count = 0 %}
+    {% set productImgHoverMedia = '' %}
+    {% if product.media.elements %}
+        {% for key, imgHover in product.media.elements|sort((a, b) => a.position <=> b.position) %}
+            {% if product.cover.id != key and count == 0 %}
+                {% set count = 1 %}
+                {% set productImgHoverMedia = imgHover.media %}
+            {% endif %} 
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+{% if productBoxHover == 2 %}
+    {% set productMediaSlider = [] %}
+    {% if product.media.elements|length > 1 %}
+        {% for key, productMedia in product.media.elements|sort((a, b) => a.position <=> b.position) %}
+            
+            {% if productMedia.media.thumbnails|length > 0 %}
+                {% set productMediaThumbnails = productMedia.media.thumbnails|sort|reverse %}
+                {% set srcsetValue %}{% apply spaceless %}
+                    {{ productMedia.media|sw_encode_media_url }} {{ productMediaThumbnails|first.width + 1 }}w, {% for thumbnail in productMediaThumbnails %}{{ thumbnail.url |sw_encode_url }} {{ thumbnail.width }}w{% if not loop.last %}, {% endif %}{% endfor %}
+                {% endapply %}{% endset %}
+
+                {% set sizesValue %}{% apply spaceless %}
+                    {% set sizes = {
+                        'xs': '500px',
+                        'sm': '500px',
+                        'md': '390px',
+                        'lg': '350px',
+                        'xl': '280px'
+                    } %}
+
+                    {% set breakpoint = {
+                        'xs': theme_config('breakpoint.xs'),
+                        'sm': theme_config('breakpoint.sm'),
+                        'md': theme_config('breakpoint.md'),
+                        'lg': theme_config('breakpoint.lg'),
+                        'xl': theme_config('breakpoint.xl')
+                    } %}
+
+                    {% for key, value in breakpoint|reverse %}(min-width: {{ value }}px) {{ sizes[key] }}{% if not loop.last %}, {% endif %}{% endfor %}, 100vw
+                {% endapply %}{% endset %}
+
+                {% set productMediaSlider = productMediaSlider|merge([{ 
+                        'src' : productMedia.media|sw_encode_media_url, 
+                        'srcset' : srcsetValue,
+                        'sizes' : sizesValue,
+                        'alt' : (product.cover.media.translated.alt ?: product.translated.name),
+                        'loading' : 'lazy', 
+                    }]) 
+                %}
+            {% endif %}        
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+{% block component_product_box_image %}
+    {% if productCard is not empty and productCard is not same as('default') and productCard is not same as('shopware') %}
+        <div class="product-image-wrapper-aspect-ratio " 
+            {% if productImgHoverMedia %}
+                data-product-img-hover-src="{{productImgHoverMedia|sw_encode_media_url}}"     
+            {% endif %}
+            {% if productMediaSlider|length > 1 %}
+                data-product-media-slider="{{ productMediaSlider|json_encode }}"     
+            {% endif %}
+            data-aspect-ratio="{{aspectRatio}}" style="--aspect-ratio:{{aspectRatio}};">
+
+            {{parent()}}
+        </div>
+    {% else %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_rating %}
+    {% if productCard is not empty and productCard is not same as('default') and productCard is not same as('shopware') %}
+        <div class="product-info-brand">
+            <span>{{ product.manufacturer.name }}</span>
+        </div>
+        {% if config('core.listing.showReview') %}
+            <div class="product-rating">
+                {% sw_include '@Storefront/storefront/component/review/rating.html.twig' with {
+                    points: product.ratingAverage,
+                    style: 'text-primary'
+                } %}
+            </div>
+        {% endif %}
+    {% else %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{# {% block component_product_box_action %}
+    {% if productCard is not empty and productCard is same as('metro') %}
+        <div class="ssik-custom-add-to-cart-wrapper" data-ssik-add-cart="true">
+            <div class="btn-buy ssik-custom-add-to-cart">
+                {% sw_icon 'icon-basket' style { 'pack':'line', 'namespace': 'SsikMetroLight', 'class':'ssik md add-cart' } %}
+                {% sw_icon 'icon-right' style { 'pack':'line', 'namespace': 'SsikMetroLight', 'class':'ssik md detail-text' } %}
+            </div>
+        </div>
+    {% endif %}
+    {{parent()}}
+{% endblock %} #}

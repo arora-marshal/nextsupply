@@ -1,0 +1,43 @@
+<div class="section-usp-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="swiper" 
+					data-ssik-swiper-plugin="true">
+					<div class="swiper-navigation">
+						<div class="swiper-button swiper-button-prev"></div>
+						<div class="swiper-button swiper-button-next"></div>
+					</div>	
+					<div class="swiper-wrapper usp-bar">
+						<div class="swiper-slide usp-bar-item">
+							<div class="usp-bar-item-icon">
+								<i class="icon {% if ssik.config.uspbaricon1 is not empty  %} {{ssik.config.uspbaricon1}} {% else %} fas fa-truck {% endif %}"></i>
+							</div>
+							<div class="usp-bar-item-text">{{ "ssik.header.usp.usp1"|trans|sw_sanitize }}</div>
+						</div>
+						<div class="swiper-slide usp-bar-item">
+							<div class="usp-bar-item-icon">
+								<i class="icon {% if ssik.config.uspbaricon2 is not empty  %} {{ssik.config.uspbaricon2}} {% else %} fas fa-undo-alt {% endif %}"></i>
+							</div>
+							<div class="usp-bar-item-text">{{ "ssik.header.usp.usp2"|trans|sw_sanitize }}</div>
+						</div>
+						<div class="swiper-slide usp-bar-item">
+							<div class="usp-bar-item-icon">
+								<i class="icon {% if ssik.config.uspbaricon3 is not empty  %} {{ssik.config.uspbaricon3}} {% else %} fas fa-hands-helping {% endif %}"></i>
+							</div>
+							<div class="usp-bar-item-text">{{ "ssik.header.usp.usp3"|trans|sw_sanitize }}</div>
+						</div>
+						<div class="swiper-slide usp-bar-item">
+							<div class="usp-bar-item-icon">
+								<i class="icon {% if ssik.config.uspbaricon4 is not empty  %} {{ssik.config.uspbaricon4}} {% else %} fab fa-expeditedssl {% endif %}"></i>
+							</div>
+							<div class="usp-bar-item-text">{{ "ssik.header.usp.usp4"|trans|sw_sanitize }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,1 @@
+import './ssik-extra-metro-product-detail';

@@ -1,0 +1,112 @@
+.filter-multi-select {
+    &-list {
+        padding-left: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        &-item {
+            padding: 0;
+            margin-bottom: .5rem;
+            font-size: 1.4rem;
+            &.is-hidden {
+                display: none;
+            }
+
+            .custom-checkbox {
+                .custom-control-label {
+                    &::before, &::after {
+                        top: .3rem;
+                        width: 1.6rem;
+                        height: 1.6rem;
+                    }
+                    &::before {
+                        border-radius: .4rem;
+                        border-color: var(--ssik-metro-filter-select-border);
+                    }
+                }
+                .custom-control-input:checked ~ .custom-control-label:before {
+                    background-color: var(--ssik-metro-filter-select-hover-color);
+                    border-color: var(--ssik-metro-filter-select-hover-color);
+                }
+            }
+
+            &:hover {
+                .custom-checkbox {
+                    .custom-control-label {
+                        color: var(--ssik-metro-filter-select-color);
+                        &::before {
+                            background-color: var(--ssik-metro-filter-select-color);
+                            border-color: var(--ssik-metro-filter-select-color);
+                        }
+                        &::after {
+                            background-image: #09f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-item-label {
+        padding-left: .25rem;
+
+    }
+    .is-more {
+        padding: .5rem;
+        font-size: 1.4rem;
+        min-height: 1.3125rem;
+        cursor: pointer;
+    }        
+}
+
+.filter-property-select-list-item {
+    .filter-property-select-preview {
+        border-radius: 0;
+        margin-right: .5rem;
+    }
+}
+
+.filter-rating-select-item-checkmark {
+    top: 1px;
+    right: 0px;
+    left:unset;
+}
+
+.filter-property-select-preview-checkmark {
+    top: .5rem;
+    left: .6rem;
+}
+
+.filter-rating-select-list-item {
+    margin-left: 0;
+}
+
+.filter-rating-select-item-label:hover .filter-rating-select-item-label-text {
+    color: var(--ssik-metro-filter-item-color);
+    font-weight: 700;
+}
+
+.form-check {
+    .form-check-input {
+        position: relative;
+        min-width: 1.5rem;
+        background-color: var(--ssik-metro-filter-select-bg);
+        border-color: var(--ssik-metro-filter-select-border);
+        &:checked {
+            background-image: none;
+            background-color: var(--ssik-metro-filter-select-hover-bg);
+            border-color: var(--ssik-metro-filter-select-hover-border);
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 4px;
+                display: block;
+                width: .5rem;
+                height: .7rem;
+                border: solid var(--ssik-metro-filter-select-hover-color);
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}

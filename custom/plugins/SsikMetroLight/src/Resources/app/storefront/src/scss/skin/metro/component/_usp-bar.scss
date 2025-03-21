@@ -1,0 +1,48 @@
+:root {
+    --swiper-navigation-size: 16px;
+}
+
+.section-usp-bar {
+    background: var(--ssik-metro-uspbar-bg);
+    padding: .5rem 0;
+    .swiper-button {
+        color: var(--ssik-metro-uspbar-text-color);
+    }
+}
+
+
+
+.usp-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    
+    &-item {
+        display: flex !important;
+        align-items: center;
+        color: var(--ssik-metro-uspbar-text-color);
+        @include font-size(var(--ssik-metro-uspbar-text-font-size));
+        text-transform: uppercase;
+        justify-content: center;
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+            width: 100%;
+        }
+
+        &-icon {
+            display: flex;
+            margin-right: .5rem;
+            .icon {
+                width: var(--ssik-metro-uspbar-icon-font-size);
+                height: var(--ssik-metro-uspbar-icon-font-size);
+                color: var(--ssik-metro-uspbar-icon-color);
+            }
+            svg {
+                vertical-align: unset;
+                height: 100%;
+            }
+        }
+    }
+}

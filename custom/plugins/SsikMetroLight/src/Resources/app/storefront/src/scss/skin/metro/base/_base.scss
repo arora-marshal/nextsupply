@@ -1,0 +1,121 @@
+html {
+    font-size: $root-font-size;
+    height: 100%;
+}
+
+body {
+    font-family: $ssik-metro-base-font-family;
+    background: var(--ssik-metro-base-bg);
+    color: var(--ssik-metro-base-color);
+    @include font-size(var(--ssik-metro-base-font-size));
+    font-weight: var(--ssik-metro-base-font-weight);
+    height: 100%;
+}
+
+.container-main {
+  .is-ctl-navigation &,
+  .is-ctl-product & {
+      padding-top: 0;
+      //padding-bottom: 0;
+  }
+  @include media-breakpoint-down(sm) {
+    //border-top: 1px solid var(--ssik-metro-input-color);
+  }
+}
+
+.content-main {
+  flex: 1 0 auto;
+}
+.footer-main {
+  flex: 0 0 auto;
+}
+
+a {
+    color: var(--ssik-metro-base-link-color);
+    transition: all .3s ease;
+    &:hover {
+        color: var(--ssik-metro-base-link-hover-color);
+        text-decoration: none;
+    }
+}
+
+h1, .h1 {
+  line-height: 1.4;
+  font-weight: var(--ssik-metro-base-headline-font-weight);
+  font-family: var(--ssik-metro-base-headline-font-family);
+  font-style: var(--ssik-metro-base-headline-font-style);
+  @include font-size(var(--ssik-metro-base-headline-font-size));
+  color: var(--ssik-metro-base-headline-color);
+}
+
+h2, .h2 {
+  line-height: 1.2;
+  font-weight: var(--ssik-metro-base-headline2-font-weight);
+  font-family: var(--ssik-metro-base-headline2-font-family);
+  font-style: var(--ssik-metro-base-headline2-font-style);
+  @include font-size(var(--ssik-metro-base-headline2-font-size));
+  color: var(--ssik-metro-base-headline2-color);
+}
+
+h3, .h3 {
+  line-height: 1.1;
+  font-family: var(--ssik-metro-base-headline3-font-family);
+  font-weight: var(--ssik-metro-base-headline3-font-weight);
+  font-style: var(--ssik-metro-base-headline3-font-style);
+  @include font-size(var(--ssik-metro-base-headline3-font-size));
+  color: var(--ssik-metro-base-headline3-color);
+}
+
+h4, .h4 {
+  line-height: 1;
+  font-family: var(--ssik-metro-base-headline4-font-family);
+  font-weight: var(--ssik-metro-base-headline4-font-weight);
+  font-style: var(--ssik-metro-base-headline4-font-style);
+  @include font-size(var(--ssik-metro-base-headline4-font-size));
+  color: var(--ssik-metro-base-headline4-color);
+}
+
+h5, .h5 {
+  line-height: 1;
+  font-family: var(--ssik-metro-base-headline5-font-family);
+  font-weight: var(--ssik-metro-base-headline5-font-weight);
+  font-style: var(--ssik-metro-base-headline5-font-style);
+  @include font-size(var(--ssik-metro-base-headline5-font-size));
+  color: var(--ssik-metro-base-headline5-color);
+}
+
+h6, .h6 {
+  line-height: 1;
+  font-family: var(--ssik-metro-base-headline6-font-family);
+  font-weight: var(--ssik-metro-base-headline6-font-weight);
+  font-style: var(--ssik-metro-base-headline6-font-style);
+  @include font-size(var(--ssik-metro-base-headline6-font-size));
+  color: var(--ssik-metro-base-headline6-color);
+}
+
+.spinner-border {
+  border-color: var(--ssik-metro-base-link-hover-color);
+  border-right-color: transparent;
+  //border-color: var(--ssik-metro-base-link-hover-color);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+small, .small {
+  font-size: 1.2rem;
+}
+
+.order-table,
+.order-table-header-context-menu {
+  border-color: var(--ssik-metro-base-border);
+}

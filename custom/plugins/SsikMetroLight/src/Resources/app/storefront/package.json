@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "swiper": "11.1.4",
+    "zoomist": "^2.0.11"
+  }
+}

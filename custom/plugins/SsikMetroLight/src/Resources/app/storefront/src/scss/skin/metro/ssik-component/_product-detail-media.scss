@@ -1,0 +1,257 @@
+.ssik-detail-media {
+    display: flex;
+    gap: 10px;
+    flex-direction: column-reverse;
+    background: #FFF;
+    flex-direction: row;
+
+    &.is-thumbs-right {
+        flex-direction: row-reverse;
+    }
+
+    &.is-fullscreen {
+        flex-direction: column-reverse;
+    }
+
+    &.is-fullscreen {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+        overflow: hidden;
+        padding: 3rem;
+        background-color: rgba(82,82,82,.5);
+        background: #FFFFFF;
+        border-radius: 6px;
+
+        .btn-fullscreen-close {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            right: 20px;
+            top: 20px;
+        }
+    }
+
+    .btn-fullscreen-close {
+        display: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 100%;
+        border: 0;
+        .icon > svg {
+            top: 0
+        }
+    }
+
+    &-images {
+        width: 100%;
+        flex-grow: 1;
+        overflow: hidden;
+
+        .is-fullscreen & {
+            height: 100%;
+        }
+
+        &-btn-nav {
+            background: var(--ssik-metro-product-box-slider-nav-bg);
+            color: var(--ssik-metro-product-box-slider-nav-color);
+            width: 2.6rem;
+            height: 2.5rem;
+            border-radius: .6rem;
+            &::after {
+                font-size: 1.2rem;
+            }
+        }
+
+        &-slider {
+            position: relative;
+
+            .is-fullscreen & {
+                height: 100%;
+            }
+
+            &-slide {
+                position: relative;
+                display: block;
+                height: 100%;
+                text-align: center;
+
+                &-inner {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                }
+
+                .is-fullscreen-allow & {
+                    cursor: zoom-in;
+                }
+
+                .is-fullscreen.is-fullscreen-allow:not(.is-magnifier-allow) & {
+                    cursor: default;
+                }
+
+                &.is-zoom-in {
+                    .is-fullscreen & {
+                        cursor: zoom-out;
+                    }
+                }
+
+                .zoomist-container {
+                    width: 100%;
+                }
+
+                .zoomist-wrapper {
+                    .is-fullscreen & {
+                        position: absolute;
+                        top: 0;
+                        right: auto;
+                        bottom: auto;
+                        left: 0;
+                        overflow: hidden;
+                        width: 100%;
+                        height: 100%;
+                        max-height: 100%;
+                    }
+                }
+
+                .zoomist-image {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    max-height: 100%;
+                    overflow: hidden;
+                }
+
+                picture {
+                    position: relative;
+                    display: block;
+                    margin: 0 auto;
+                    width: auto;
+                    height: 100%;
+                    max-width: 100%;
+
+                    &::before {
+                        content: '';
+                        display: inline-block;
+                        padding-bottom: calc(100% / (var(--aspect-ratio)));
+                    }
+                }
+
+                &-img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 100%;
+                    height: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    .is-fullscreen & {
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+    }
+
+    &-thumbs {
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+            display: block;
+            overflow: hidden;
+            width: 120px;
+        }
+
+        .is-fullscreen & {
+            display: block;
+
+            @include media-breakpoint-up(md) {
+                width: 100%;
+            }
+        }
+
+        &-btn-nav {
+            background: var(--ssik-magic-product-box-slider-nav-bg);
+            color: var(--ssik-magic-product-box-slider-nav-color);
+            width: 2.6rem;
+            height: 2.5rem;
+            border-radius: .6rem;
+            &::after {
+                font-size: 1.2rem;
+            }
+        }
+
+        &-slider {
+            position: relative;
+            padding-bottom: 10px;
+            overflow: visible;
+
+            @include media-breakpoint-up(md) {
+                padding-bottom: 0;
+            }
+
+            .is-fullscreen & {
+                height: unset;
+                max-width: 500px;
+                overflow: hidden;
+            }
+
+            &-slide {
+                picture {
+                    position: relative;
+                    display: block;
+                    height: 100%;
+                    max-width: 100%;
+
+                    &::before {
+                        content: '';
+                        display: inline-block;
+                        padding-bottom: calc(100% / (var(--aspect-ratio)));
+                    }
+                }
+
+                &-img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 100%;
+                    height: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}
+
+.ssik-detail-media:not(.is-fullscreen) {
+    .ssik-detail-media-thumbs {
+        .swiper-button-prev {
+            top: 2.5rem;
+            left: 0;
+            width: 100%;
+            border-radius: 0;
+            &::after {
+                transform: rotate(90deg);
+            }
+        }
+        .swiper-button-next {
+            top:100%;
+            left: 0;
+            width: 100%;
+            border-radius: 0;
+            &::after {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
