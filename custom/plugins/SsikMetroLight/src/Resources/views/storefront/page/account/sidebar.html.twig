@@ -1,10 +1,42 @@
 {% sw_extends '@Storefront/storefront/page/account/sidebar.html.twig' %}
 
 {% block page_account_sidebar_logout %}
-    <div class="list-group">
-        <a href="{{ path('frontend.account.logout.page') }}"
-            class="list-group-item list-group-item-action account-aside-item">
-            {{ 'account.logout'|trans|sw_sanitize }}
-        </a>
+<div class="list-group">
+
+    <div style="margin-top: 10px;">
+        <h4 style="font-size: 18px; margin-bottom: 8px; color: #333;">Ship To:</h4>
+        <ul
+            style="list-style: none; padding: 0; margin: 0; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; max-width: 300px;">
+            {% for address in page.addresses %}
+            {% set isDefault = (address.id == context.customer.defaultShippingAddressId) %}
+            <li style="padding: 0; margin: 0;">
+                <form action="/account/address/default-shipping/{{ address.id }}" method="post">
+                    <button type="submit" style="background-color: {% if isDefault %}#e9f5e9{% else %}#fff{% endif %};
+                                   border: none;
+                                   color: #333;
+                                   text-align: left;
+                                   width: 100%;
+                                   padding: 10px 12px;
+                                   cursor: pointer;
+                                   font-weight: {% if isDefault %}bold{% else %}normal{% endif %};">
+                        
+                        {% if isDefault %}
+                        <span style="color: green; margin-left: 5px;">{{ address.countryState.translated.name }}</span>
+                        {% else %}
+
+                        {{ address.countryState.translated.name }}
+                        {% endif %}
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
+
+
+    <a href="{{ path('frontend.account.logout.page') }}"
+        class="list-group-item list-group-item-action account-aside-item">
+        {{ 'account.logout'|trans|sw_sanitize }}
+    </a>
+</div>
 {% endblock %}

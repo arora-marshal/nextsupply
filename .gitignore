@@ -18,3 +18,7 @@
 /install.lock
 public/asset-manifest.json
 ###< shopware/core ###
+custom/plugins/NuLogicProducts/*
+config/packages/web_profiler.yaml
+config/routes/web_profiler.yaml
+config/bundles.php
