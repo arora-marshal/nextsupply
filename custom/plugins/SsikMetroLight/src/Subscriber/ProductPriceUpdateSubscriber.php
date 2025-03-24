@@ -49,11 +49,13 @@ class ProductPriceUpdateSubscriber implements EventSubscriberInterface
         return null; // No matching rule found
     }
 
-    public function updateProduct($context, $product)
+    public function updateProduct($salesChannelContext, $product)
     {
         $prices = $product->getPrices()?->getElements();
         $filteredPrices = [];
+        $context = $salesChannelContext->getContext();
         $currentRuleId = $this->getCurrentRuleId($context);
+        $customer = $salesChannelContext->getCustomer();
 
         if ($prices) {
             foreach ($prices as $price) {
@@ -64,7 +66,7 @@ class ProductPriceUpdateSubscriber implements EventSubscriberInterface
             }
         }
         //  Hide product if no price exists for the current rule
-        if (empty($filteredPrices)) {
+        if (empty($filteredPrices) && !empty($customer)) {
             $data['customFields']['hide_product'] = true;
 
             $this->priceUpdater->updateProductDetails($context, $product, $data);
@@ -82,12 +84,11 @@ class ProductPriceUpdateSubscriber implements EventSubscriberInterface
         if ($this->isProcessing) {
             return; // Exit to prevent recursion
         }
-        $context = $event->getContext();
-
+        $salesChannelContext = $event->getSalesChannelContext();
         $this->isProcessing = true;
         $product = $event->getPage()->getProduct(); // Correct product
 
-        $this->updateProduct($context, $product);
+        $this->updateProduct($salesChannelContext, $product);
 
         $this->isProcessing = false; // Reset the guard
     }
