@@ -88,6 +88,17 @@
         {% endif %}
     {% endif %}   
         
-    {{parent()}}
+    {% for product in searchResult %}
+      {% if product is not empty and (not context.customer or (product.customFields['hide_product'] ?? false) == false) %}  
+            <div class="cms-listing-col {{ listingColumns }}" role="listitem">
+                {% block element_product_listing_box %}
+                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                        layout: boxLayout,
+                        displayMode: displayMode
+                    } %}
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endfor %}
 
 {% endblock %}
